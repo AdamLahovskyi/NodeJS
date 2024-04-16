@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Weather page</title>
+</head>
+<body>
+{{> header}}
+<section id="weather">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="list-group">
+                    <a class="list-group-item" href="/weather/Kyiv">Kyiv</a>
+                    <a class="list-group-item" href="/weather/Zhytomyr">Zhytomyr</a>
+                    <a class="list-group-item" href="/weather/Lviv">Lviv</a>
+                    <a class="list-group-item" href="/weather/Odesa">Odesa</a>
+                    <label class="list-group-item">
+                        <input type="text" id="cityInput" style="margin-right: 10px;">
+                        <button id="searchBtn" style="margin-top: 10px">Search</button>
+                    </label>
+                </div>
+            </div>
+
+            <div class="list-group">
+                <div class="list-group-item" style="width: 800px">
+                    {{#if city}}
+                        <h2 class="weather-title">Weather in {{city}}</h2>
+                        <a class="list-group-item"><img src="https://openweathermap.org/img/wn/{{weather.weather.0.icon}}@2x.png" alt="Weather icon" class="weather-icon" style="display: block; margin: 0 auto;"></a>
+                        <p class="list-group-item" class="weather-temp"><b>Temperature: </b>{{weather.main.temp}}</p>
+                        <p class="list-group-item" class="weather-humidity"><b>Humidity: </b>{{weather.main.humidity}}</p>
+                        <p class="list-group-item" class="weather-temp"><b>Pressure: </b>{{weather.main.pressure}}</p>
+                    {{else}}
+                        <p class="list-group-item"><b>City is not chosen</b></p
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{{>footer}}
+<script>
+    document.getElementById('searchBtn').addEventListener('click', function() {
+        let city = document.getElementById('cityInput').value;
+        window.location.href = '/weather/' + city;
+    });
+</script>
+</body>
+</html>
